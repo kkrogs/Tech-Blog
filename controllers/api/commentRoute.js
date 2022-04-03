@@ -25,7 +25,7 @@ router.post('/:id', logginCheck, async (req, res) => {
 
         res.status(200).json(commentData);
 
-        // catches any errors
+        // catches any 400 errors
     } catch (err) {
         res.status(400).json(err);
     }
