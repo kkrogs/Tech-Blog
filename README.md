@@ -13,7 +13,7 @@ This application follows the Model View Controller structure by using Handlebars
 * [Tests](#tests)
 * [Questions](#questions)
 # Installation
-The following necessary dependencies must be installed to run the application Ther user needs to install SQL on their local computer.
+The user needs to install SQL on their local computer in order to run this application locally.
 # Usage
 In order to use this app, The user will need to sign up to start. After signing up, they can create, edit, or delete a post in the dashboard section. Once finished, the user can logout of the application and then be able to log back in for next time.
 # License
@@ -23,7 +23,7 @@ This project is licensed under the MIT license.
 # Contributors
  Kourtney
 # Tests
-The following is needed to run the test: The user will need to clone the repository, run 'npm i', and then 'cd db/', mysql -u root -p, login to sql, then run source schema.sql. After running that command in sql, quit sql by typing 'quit;',run 'npm run seed', 'npm start'. Then open up localhost3001 on their browser.
+The following is needed to run the test: The user will need to clone the repository, run 'npm i', and then 'cd db/', mysql -u root -p, login to sql, then run source schema.sql. After running that command in sql, quit sql by typing 'quit;',run 'npm run seed', 'npm start'. Then open up http://localhost:3001/ on their browser.
 # Questions
 If you have any questions about the repository, feel free to contact me at kourtney.krogman@gmail.com.
 
