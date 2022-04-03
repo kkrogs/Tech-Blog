@@ -52,7 +52,7 @@ const submitNewComment = async (e) => {
     }
 };
 
-// allows the user to update a post
+// allows the user to update a post. If the post can not be updated for whatever reason, throw a failed post error
 const updatePost = async (e) => {
     e.preventDefault();
 
