@@ -78,7 +78,7 @@ const updatePost = async (e) => {
     }
 };
 
-// allows the user to delete a post
+// allows the user to delete a post. If the post can not be deleted, throw delete fail error
 const deletePost = async (e) => {
     e.preventDefault();
 
