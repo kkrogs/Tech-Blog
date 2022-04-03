@@ -2,7 +2,8 @@
  ![badge](https://img.shields.io/badge/License-MIT-brightgreen)
 
 # Description
-The project is a blog where users can post information to a website that can be viewed by other users. The user can also login, create, edit, delete, and comment on posts in order to ensure that the proper information is being portrayed to other users.
+
+This blog allows users to publish their blog posts and comment on other users' posts as well. It follows the MVC paradigm in its architectural structure, and uses Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
 # Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
