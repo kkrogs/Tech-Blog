@@ -1,7 +1,7 @@
 const submitSignupBtn = document.querySelector('#submit-sign-up-btn');
 const submitLoginBtn = document.querySelector('#submit-login-btn');
 
-// this function allows a new user to sign up
+// using async function to allow new user to sign up
 const signupNewUser = async (e) => {
     e.preventDefault();
 
