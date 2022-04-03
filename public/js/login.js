@@ -31,7 +31,7 @@ const signupNewUser = async (e) => {
     }
 };
 
-// this allows a new user to loggin
+// this allows a new user to login and prevents the default behavior. Also stating to throw an error if the application can't catch the login for some reason.
 const logUserIn = async (e) => {
     e.preventDefault();
 
