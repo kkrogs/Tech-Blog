@@ -1,7 +1,7 @@
 const submitSignupBtn = document.querySelector('#submit-sign-up-btn');
 const submitLoginBtn = document.querySelector('#submit-login-btn');
 
-// using async function to allow new user to sign up
+// using async function to allow new user to sign up. Preventdefault ensures that nothing regresses back to the default behavior
 const signupNewUser = async (e) => {
     e.preventDefault();
 
