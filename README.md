@@ -2,8 +2,9 @@
  ![badge](https://img.shields.io/badge/License-MIT-brightgreen)
 
 # Description
+This blog is used as an organizational tool similar to Wordpress which allows users to publish their blog posts and comment on other users' posts as well. The user can sign up, login, create, edit, and delete a post, and log out. Having a username to login allows for extra added security and so that the user has the ability to come back to their post by logging back in whenever needed.
 
-This blog allows users to publish their blog posts and comment on other users' posts as well. It follows the MVC paradigm in its architectural structure, and uses Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+This application follows the Model View Controller structure by using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
 # Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
