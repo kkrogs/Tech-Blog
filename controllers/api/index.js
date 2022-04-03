@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const userRoute = require('./userRoute')
-const postRoute = require('./postRoute')
-const commentRoutes = require('./commentRoute')
 
-// determins the route depending on the input
-router.use('/users', userRoute);
-router.use('/posts', postRoute);
-router.use('/comments', commentRoutes);
+const userRoutes = require('./user-routes.js');
+const postRoutes = require('./post-routes.js');
+const commentRoutes = require('./comment-routes.js');
+
+router.use('/user', userRoutes);
+router.use('/post', postRoutes);
+router.use('/comment', commentRoutes);
 
 module.exports = router;

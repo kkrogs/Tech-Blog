@@ -1,120 +1,70 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../models');
-const logginCheck = require('../utils/auth');
+const { Post, Comment, User } = require('../models/');
+const withAuth = require('../utils/auth');
 
-
-// this is if there is a get request for the hame page. The user is then given the 'homepage' handlebars file
+// get all posts for homepage
 router.get('/', async (req, res) => {
-
-
-    console.log(req.session.user_id);
-    console.log("-----------------------");
-
-    // this finds all of the posts that are in the database and populates the homepage with them
-    try {
-        const dbPostData = await Post.findAll({ include: { model: User } }, { plain: true })
-        const posts = dbPostData.map((post) =>
-            post.get({ plain: true }));
-
-        res.render('homepage', {
-            posts,
-            loggedIn: req.session.loggedIn,
-        });
-
-        // catches any errors
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
+  try {
+    // we need to get all Posts and include the User for each (change lines 8 and 9) - DONE!
+    const postData = await Post.findAll({
+      include: [User],
+    });
+    // serialize the data
+    const posts = postData.map((post) => post.get({ plain: true }));
+    // we should render all the posts here - DONE!
+    res.render('all-posts-admin', { posts, loggedIn: req.session.loggedIn});
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// this gets the dashboard route and populates it with the users posts
-router.get('/dashboard', logginCheck, async (req, res) => {
+// get single post
+router.get('/post/:id', withAuth, async (req, res) => {
+  try {
+    // what should we pass here? we need to get some data passed via the request body (something.something.id?)
+    // change the model below, but not the findByPk method. - DONE!
+    const postData = await Post.findOne({
+      // helping you out with the include here, no changes necessary
+      where: {id: req.params.id},
+      include: [
+        User,
+        {
+          model: Comment,
+          include: [User],
+        },
+      ],
+    });
 
-    // this finds all the posts that were created by the user. It then populates the dashboard page with them
-    try {
-        const dbPostData = await Post.findAll({ include: { model: User } } )
-
-
-        const plainPosts = dbPostData.map((post) =>
-            post.get({ plain: true }));
-
-        console.log(plainPosts);
-
-        const posts = plainPosts.filter(post => post.user_id == req.session.user_id)
-
-        res.render('dashboard', {
-            posts,
-            loggedIn: req.session.loggedIn,
-        });
-
-        // catches any errors
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-// this gives the user a rage where they are able to create posts
-router.get('/create-post', logginCheck, async (req, res) => {
-
-    // this renders the page for the user
-    try {
-        res.render('create-post', {
-            loggedIn: req.session.loggedIn
-        });
-
-        // catches any errors
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-// this gives the user a rage where they can edit a post by the id
-router.get('/edit-post/:id', logginCheck, async (req, res) => {
-
-    // this finds the post that the user wanted to edit and renders the edit page with that information
-    try {
-        const singePostData = await Post.findByPk(req.params.id, {
-            include: [{ model: User }, { model: Comment }]
-        });
-
-        const post = singePostData.get({ plain: true });
-
-        res.render('edit-post', {
-            post,
-            loggedIn: req.session.loggedIn,
-        });
-
-        // catches any errors
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-// this renders the login page for the user
-router.get('/login', async (req, res) => {
-    res.render('login');
-});
-
-// this renders the signup page for the user
-router.get('/signup', async (req, res) => {
-    res.render('signup');
-});
-
-// this checks to see if a user is logged in. if they are they are then logged out and sent to the homepage
-router.get('/logout', (req, res) => {
-    if (req.session.loggedIn) {
-
-        req.session.destroy(() => {
-            res.redirect('/');
-            return;
-        });
+    if (postData) {
+      // serialize the data
+      const post = postData.get({ plain: true });
+      // which view should we render for a single-post? - DONE!
+      console.log(post);
+      res.render('single-post', { post, loggedIn: req.session.loggedIn});
     } else {
-        res.status(404).end();
+      res.status(404).end();
     }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// giving you the login and signup route pieces below, no changes needed.
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/dashboard');
+    return;
+  }
+  res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/dashboard');
+    return;
+  }
+
+  res.render('signup');
 });
 
 module.exports = router;
