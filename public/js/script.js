@@ -3,7 +3,7 @@ const submitCommentBtn = document.querySelector('#submit-comment-btn');
 const updatePostBtn = document.querySelector('#update-post-btn');
 const deletePostBtn = document.querySelector('#delete-post-btn');
 
-// allows the user to submit a new post
+// allows the user to submit a new post. If the post can not be created for whatever reason, throws an error
 const submitNewPost = async (e) => {
     e.preventDefault();
 
