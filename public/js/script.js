@@ -27,7 +27,7 @@ const submitNewPost = async (e) => {
     }
 };
 
-// allows the user to submit a new comment
+// allows the user to submit a new comment. If the comment can not be created for whatever reason, throw fail error
 const submitNewComment = async (e) => {
     e.preventDefault();
 
