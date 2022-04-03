@@ -1,0 +1,20 @@
+[
+    {
+        "content": "Great post!",
+        "post_id": "1",
+        "user_id": "1",
+        "poster_username": "Xandromus"
+    },
+    {
+        "content": "Your post was alright...",
+        "post_id": "2",
+        "user_id": "1",
+        "poster_username": "Xandromus"
+    },
+    {
+        "content": "Not the biggest fan of it, but oh well.",
+        "post_id": "2",
+        "user_id": "3",
+        "poster_username": "Terry Prachett"
+    }
+]

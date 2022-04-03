@@ -1,25 +1,62 @@
-const loginFormHandler = async function(event) {
-  event.preventDefault();
+const submitSignupBtn = document.querySelector('#submit-sign-up-btn');
+const submitLoginBtn = document.querySelector('#submit-login-btn');
 
-  const usernameEl = document.querySelector('#username-input-login');
-  const passwordEl = document.querySelector('#password-input-login');
+// this function allows a new user to sign up
+const signupNewUser = async (e) => {
+    e.preventDefault();
 
-  const response = await fetch('/api/user/login', {
-    method: 'POST',
-    body: JSON.stringify({
-      username: usernameEl.value,
-      password: passwordEl.value,
-    }),
-    headers: { 'Content-Type': 'application/json' },
-  });
+    const username = document.querySelector('#username').value.trim();
+    const password = document.querySelector('#password').value.trim();
 
-  if (response.ok) {
-    document.location.replace('/dashboard');
-  } else {
-    alert('Failed to login');
-  }
+    if (password.split("").length < 8) {
+        alert("password must be at least 8 characters long. Please try again");
+        return;
+    }
+
+    if (username && password) {
+        const response = await fetch('/api/users', {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+            document.location.replace('/');
+        } else {
+            alert('Failed to sign up, please try again');
+        }
+    }
+    else {
+        alert('Please enter a valid username and password (password must be at least 8 characters)');
+    }
 };
 
-document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+// this allows a new user to loggin
+const logUserIn = async (e) => {
+    e.preventDefault();
+
+    const username = document.querySelector('#username').value.trim();
+    const password = document.querySelector('#password').value.trim();
+
+    if (username && password) {
+        const response = await fetch('/api/users/login', {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+            document.location.replace('/');
+        } else {
+            alert('Failed to log in, please try again');
+        }
+    }
+};
+
+// event listeners to trigger each function
+if (submitSignupBtn) {
+    submitSignupBtn.addEventListener('click', signupNewUser);
+}
+if (submitLoginBtn) {
+    submitLoginBtn.addEventListener('click', logUserIn);
+}
