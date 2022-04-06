@@ -30,4 +30,5 @@ If you have any questions about the repository, feel free to contact me at kourt
 Here is a link to view the repository from Github:
 https://github.com/kkrogs/Tech-Blog
 
+Link to Deployed Application on Heroku: https://kourtneys-tech-blog-app.herokuapp.com/
 
